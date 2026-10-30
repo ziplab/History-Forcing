@@ -1,0 +1,49 @@
+# Normalize text while keeping Linux-facing source and scripts on LF.
+* text=auto
+
+*.py       text eol=lf
+*.sh       text eol=lf
+*.md       text eol=lf
+*.txt      text eol=lf
+*.json     text eol=lf
+*.jsonl    text eol=lf
+*.yaml     text eol=lf
+*.yml      text eol=lf
+*.toml     text eol=lf
+*.ini      text eol=lf
+*.cfg      text eol=lf
+*.csv      text eol=lf
+*.tsv      text eol=lf
+*.ipynb    text eol=lf
+
+# Keep Windows-only command files native on Windows.
+*.ps1      text eol=crlf
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+
+# Model weights and datasets are binary. Large files should use external
+# storage or Git LFS rather than regular Git objects.
+*.pt          binary
+*.pth         binary
+*.ckpt        binary
+*.safetensors binary
+*.onnx        binary
+*.mdb         binary
+*.npy         binary
+*.npz         binary
+*.pkl         binary
+
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.webp     binary
+*.mp4      binary
+*.mov      binary
+*.avi      binary
+*.mkv      binary
+
+*.zip      binary
+*.tar      binary
+*.gz       binary
+*.7z       binary

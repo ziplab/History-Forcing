@@ -1,0 +1,65 @@
+# Claude
+.claude/
+
+# Local editor and working files
+/AGENTS.md
+# Local project documentation; upstream/vendor documentation stays trackable.
+/docs/
+/dmd/docs/
+/opsd/docs/
+/local/
+/dmd/evaluation/vbench/VBench/
+/.vscode/
+/.codex_sync/
+/.codex/
+/.agents/
+/scratch/
+/opsd/data_pipelines/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+/.venvs/
+/venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+*.egg-info/
+/build/
+/dist/
+.coverage
+.coverage.*
+/htmlcov/
+/coverage.xml
+
+# Secrets and experiment trackers
+.env
+.env.*
+**/configs/**/*.local.yaml
+.swanlab/
+wandb/
+swanlog/
+
+# Local data, models, and training outputs
+/dataset/
+/dmd/prompts/vidprom_filtered_extended.txt
+/datasets/
+/models/
+/output/
+/checkpoints/
+/cache/
+/demo/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.mdb
+*.log
+*.tmp
+*.part
+*.partial

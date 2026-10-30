@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "playworld"
+version = "0.1.0"
+description = "Agent Player interfaces and evaluation tools for PlayWorld"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "google-genai>=1.0.0",
+  "Pillow>=10.0.0",
+  "playwright>=1.40.0",
+]
+
+[project.optional-dependencies]
+dev = ["build>=1.2", "pytest>=8.0"]
+
+[project.scripts]
+playworld-eval = "metrics.vqa.score:main"
+playworld-aggregate = "metrics.aggregate:main"
+playworld-player-genie3 = "Agent_player.genie3.player:main"
+playworld-player-happyoyster = "Agent_player.happyoyster.player:main"
+
+[tool.setuptools.packages.find]
+include = ["metrics*", "Agent_player*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

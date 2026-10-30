@@ -1,0 +1,25 @@
+# Long video generation.
+generation:
+  latent_frames: 252
+  height: 480
+  width: 832
+  fps: 16
+  batch_size: 1
+  dtype: bfloat16
+  weights: ema
+  seed: 0
+  num_threads: 4
+  crf: 23
+
+# [Sink 3] + [Long EMA 1] + [Short EMA 1] + [Recent 4] + [New 3]
+memrope:
+  cache_frames: 12
+  sink_frames: 3
+  recent_frames: 4
+  long_memory_frames: 1
+  short_memory_frames: 1
+  compression_method: ema
+  ema_alpha_long: 0.01
+  ema_alpha_short: 0.1
+  ema_adaptive: false
+  use_block_rope: true

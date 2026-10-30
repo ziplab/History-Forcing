@@ -1,0 +1,96 @@
+model: backbones.dreamx:DreamXAR
+launcher:
+  NPROC_PER_NODE: 8
+environment:
+  OMP_NUM_THREADS: 8
+  HF_HOME: models/.cache/huggingface
+  TORCH_HOME: models/.cache/torch
+paths:
+  model_dir: models/DreamX-World-5B
+  data_path: dataset/packed/dreamx/ar_few_step/train
+  train_manifest: dataset/History-Forcing/train/train.parquet
+  initial_checkpoint: ${paths.model_dir}/model.safetensors
+train:
+  recipe: opsd
+  opsd:
+    checkpoint: ${paths.initial_checkpoint}
+    checkpoint_mode: weights
+    output_dir: output/opsd/dreamx/ar_few_step
+    max_train_steps: 100
+    save_every: 100
+    max_checkpoints: 0
+    log_every: 1
+    batch_size: 1
+    gradient_accumulation: 1
+    sharding_strategy: NO_SHARD
+    num_workers: 0
+    seed: 42
+    lora_rank: 64
+    lora_alpha: 128
+    lora_target_modules: all-linear
+    freeze_camera: true
+    learning_rate: 1.0e-05
+    adam_beta1: 0.0
+    adam_beta2: 0.999
+    adam_epsilon: 1.0e-08
+    weight_decay: 0.01
+    max_grad_norm: 10.0
+    lr_warmup_steps: 0
+    ema_decay: 0.9999
+    sampling_mode: sde
+    num_supervised_denoising_steps: 4
+    history_guidance_scale: 3.0
+    guidance_scale: 1.0
+    teacher_kv:
+      shared_recent_frames: 4
+      positive:
+        sink_frames: 1
+        history_frames: native
+      negative:
+        sink_frames: 1
+        history_frames: 0
+    mse_space: velocity
+    report_to: wandb
+    tracker_mode: online
+    project_name: history-forcing
+    evaluator: engine.evaluation:CheckpointEvaluationSuite
+inference:
+  parquet: ${evaluation.datasets.playworld_oos.prepared_data}
+  checkpoint: ${paths.initial_checkpoint}
+  data_path: dataset/packed/dreamx/ar_few_step/playworld_oos
+  output_dir: output/opsd/dreamx/ar_few_step/inference
+  use_data_length: true
+  batch_size: 1
+  num_samples: all
+  sample_index: 0
+  samples_per_prompt: 1
+  noise_scale: 1.0
+  seed: 42
+  save_latent: false
+evaluation:
+  evaluator: engine.evaluation:CheckpointEvaluationSuite
+  world_model: DreamX-World-5B
+  datasets:
+    playworld_oos:
+      evaluator: evaluation.playworld.evaluator:PlayWorldEvaluator
+      prepared_data: dataset/History-Forcing/benchmarks/playworld_oos/test.parquet
+      data_path: dataset/packed/dreamx/ar_few_step/playworld_oos
+      baseline: output/opsd/dreamx/ar_few_step/base/playworld_oos
+      output_name: playworld_oos
+      workers: 3
+      judge_provider: seed-lite
+      judge_model: doubao-seed-2-0-lite-260428
+    memobench_real:
+      evaluator: evaluation.memobench.evaluator:MemoBenchEvaluator
+      prepared_data: dataset/History-Forcing/benchmarks/memobench_real/test.parquet
+      data_path: dataset/packed/dreamx/ar_few_step/memobench_real
+      data_root: dataset/History-Forcing/benchmarks/memobench_real
+      baseline: output/opsd/dreamx/ar_few_step/base/memobench_real
+      output_name: memobench_real
+      camera:
+        movement_blocks:
+          pan_left_right: 5
+          pan_right_left: 4
+          tilt_up_down: 3
+        initial_hold_blocks: 1
+        return_hold_blocks: 3

@@ -1,0 +1,32 @@
+# Copyright 2024-2025 The Alibaba Wan Team Authors. All rights reserved.
+from easydict import EasyDict
+
+from .shared import wan_shared_cfg
+
+#------------------------ Wan T2V 14B ------------------------#
+
+t2v_14B = EasyDict(__name__='Config: Wan T2V 14B')
+t2v_14B.update(wan_shared_cfg)
+
+# t5
+
+# vae
+t2v_14B.vae_checkpoint = 'Wan2.1_VAE.pth'
+t2v_14B.vae_stride = (4, 8, 8)
+
+# transformer
+t2v_14B.patch_size = (1, 2, 2)
+t2v_14B.dim = 5120
+t2v_14B.ffn_dim = 13824
+t2v_14B.freq_dim = 256
+t2v_14B.num_heads = 40
+t2v_14B.num_layers = 40
+t2v_14B.window_size = (-1, -1)
+t2v_14B.qk_norm = True
+t2v_14B.cross_attn_norm = True
+t2v_14B.eps = 1e-6
+
+t2v_14B.base = 'wan2.1'
+t2v_14B.model_type = 't2v'
+t2v_14B.in_dim = 16
+t2v_14B.out_dim = 16

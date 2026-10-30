@@ -1,0 +1,44 @@
+generator_ckpt: models/Causal-Forcing/chunkwise/ar_diffusion.pt
+generator_fsdp_wrap_strategy: size
+text_encoder_fsdp_wrap_strategy: size
+
+num_train_timestep: 1000
+timestep_shift: 5.0
+guidance_scale: 3.0
+denoising_loss_type: flow
+mixed_precision: true
+seed: 42
+
+wandb_host: https://api.wandb.ai
+wandb_entity: null
+wandb_project: long-video
+
+sharding_strategy: hybrid_full
+batch_size: 1
+total_batch_size: 8
+gradient_accumulate: 1
+num_workers: 4
+lr: 2.0e-06
+beta1: 0.0
+beta2: 0.999
+ema_weight: 0.0
+ema_start_step: 2000000000
+
+log_iters: 100
+
+negative_prompt: '色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走'
+
+image_or_video_shape: [1, 42, 16, 60, 104]
+trainer: diffusion
+gradient_checkpointing: true
+num_frame_per_block: 3
+num_training_frames: 42
+load_raw_video: false
+teacher_forcing: true
+model_kwargs:
+  timestep_shift: 5.0
+  local_attn_size: 42
+  sink_size: 3
+  max_num_frames: 42
+  frame_seq_length: 1560
+data_path: dataset/UltraVideo-Long-5K/clean_data_42
