@@ -13,7 +13,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/arXiv-Coming_Soon-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white" alt="Paper coming soon">
-  <a href="https://xzxxntxdy.github.io/History-Forcing-Project-Page/"><img src="https://img.shields.io/badge/Project-Page-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Project page"></a>
+  <a href="https://ziplab.co/History-Forcing-Project-Page/"><img src="https://img.shields.io/badge/Project-Page-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Project page"></a>
   <a href="https://huggingface.co/xzxxntxdy/History-Forcing"><img src="https://img.shields.io/badge/Hugging_Face-Models-FFD21E?style=for-the-badge&logo=huggingface&logoColor=FFD21E" alt="Hugging Face models"></a>
   <a href="https://huggingface.co/datasets/xzxxntxdy/History-Forcing-Data"><img src="https://img.shields.io/badge/Hugging_Face-Data-FFD21E?style=for-the-badge&logo=huggingface&logoColor=FFD21E" alt="Hugging Face data"></a>
 </p>
