@@ -73,6 +73,8 @@ Run all commands from the repository root. MemoBench also requires the [evaluati
 | World model | DreamX-World-5B | [🤗 OPSD](https://huggingface.co/xzxxntxdy/History-Forcing/tree/main/opsd) |
 | Autoregressive teacher | Wan2.1-T2V-1.3B | [🤗 AR teacher](https://huggingface.co/xzxxntxdy/History-Forcing/tree/main/ar_teacher) |
 
+The released DMD checkpoint was trained with the 10-second AR teacher.
+
 The [🤗 History-Forcing-Data](https://huggingface.co/datasets/xzxxntxdy/History-Forcing-Data) dataset contains prepared training inputs, PlayWorld OOS tasks and MemoBench Real scenes. The commands below save weights to `models/`, data to `dataset/` and generated videos to `output/`.
 
 ## Quick Start
