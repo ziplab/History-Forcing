@@ -2,12 +2,12 @@
 <h3 align="center">Distilling History-Dependent Continuations for Long-Horizon Video World Models</h3>
 
 <p align="center">
-  Hangyi Kuang<sup>1,*</sup>, Chengzhi Wang<sup>1,*</sup>, Yefei He<sup>1</sup>, Weijie Wang<sup>1</sup>, Yuke Zhao<sup>1</sup>, Zisu Huang<sup>2</sup><br>
-  Yifan Yang<sup>2</sup>, Xiaoxuan He<sup>1,†</sup>, Feng Chen<sup>3,†</sup>, Bohan Zhuang<sup>1</sup>
+  Hangyi Kuang<sup>1,*</sup>, Chengzhi Wang<sup>1,*</sup>, Yefei He<sup>1</sup>, Weijie Wang<sup>1</sup>, Yuke Zhao<sup>1,2</sup>, Zhuokun Chen<sup>3</sup><br>
+  Zisu Huang<sup>2</sup>, Yifan Yang<sup>2</sup>, Xiaoxuan He<sup>1,†</sup>, Feng Chen<sup>4,†</sup>, Bohan Zhuang<sup>1</sup>
 </p>
 
 <p align="center">
-  <sup>1</sup> Zhejiang University &nbsp; <sup>2</sup> Microsoft Research &nbsp; <sup>3</sup> Adelaide University<br>
+  <sup>1</sup> Zhejiang University &nbsp; <sup>2</sup> Microsoft Research &nbsp; <sup>3</sup> Monash University &nbsp; <sup>4</sup> Adelaide University<br>
   <sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding authors
 </p>
 
@@ -32,13 +32,13 @@
   <img src="assets/teaser.png" width="100%" alt="History Forcing for long-video generation and out-of-sight world modeling">
 </p>
 
-**History Forcing** is a unified **on-policy distillation framework** for few-step autoregressive video models. It strengthens historical supervision to support consistent long-video generation and plausible scene evolution while regions are out of sight.
+**History Forcing** is a unified **on-policy distillation framework** for few-step autoregressive video generators. It compares teacher predictions with and without informative history, then adds the weighted residual to the score or velocity target used for distillation. This strengthens historical constraints for consistent long-video generation and plausible out-of-sight scene evolution.
 
 History Forcing introduces:
 
-1. **History-contrast supervision.** Comparing teacher predictions with and without informative history isolates the influence of history on the current prediction. This correction strengthens historical constraints separately from the base generative supervision.
-2. **Long-video consistency.** Earlier segments of the student rollout provide subject and scene information less affected by accumulated drift. The resulting history correction guides DMD while retaining the bidirectional teacher's visual-quality supervision.
-3. **Out-of-sight evolution.** Fixed-camera teacher rollouts capture how a region evolves while the student looks away. History-guided on-policy self-distillation then supervises the student's continuation when the camera returns.
+1. **History-contrast supervision.** The AR teacher predicts the same noisy student chunk under two contexts that differ only in additional history. Their residual strengthens historical constraints independently of the teacher's overall generative supervision.
+2. **Long-video consistency.** Earlier chunks of the student rollout provide subject and scene information less affected by accumulated drift. The residual corrects the DMD reference score while retaining the bidirectional teacher's visual-quality supervision.
+3. **Out-of-sight evolution.** Fixed-camera teacher rollouts model how a scene evolves while the student looks away. Their history guides the EMA teacher's velocity target for on-policy self-distillation at revisits.
 
 ## News
 
@@ -48,7 +48,7 @@ History Forcing introduces:
 ## Method Overview
 
 <p align="center">
-  <img src="assets/overview.png" width="100%" alt="History-guided target construction and the two history settings">
+  <img src="assets/overview.png" width="100%" alt="History Forcing: on-policy student rollout, history contrast, and corrected score or velocity targets for long-video generation and out-of-sight world modeling">
 </p>
 
 ## Installation
