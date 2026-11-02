@@ -14,11 +14,14 @@ See the main README for [installation](../README.md#installation), [downloads an
 
 | Configuration | Purpose |
 |---|---|
-| [dmd_10s_teacher.yaml](../configs/long_video/dmd_10s_teacher.yaml) | History-guided DMD with the fine-tuned AR teacher |
-| [dmd_5s_teacher.yaml](../configs/long_video/dmd_5s_teacher.yaml) | History-guided DMD with the published AR teacher |
-| [dmd_baseline.yaml](../configs/long_video/dmd_baseline.yaml) | DMD baseline |
+| [dmd_ar10s_bi1p3b.yaml](../configs/long_video/dmd_ar10s_bi1p3b.yaml) | History-guided DMD with a 10s AR teacher and a 1.3B bidirectional teacher |
+| [dmd_ar10s_bi14b.yaml](../configs/long_video/dmd_ar10s_bi14b.yaml) | History-guided DMD with a 10s AR teacher and a 14B bidirectional teacher |
+| [dmd_ar5s_bi1p3b.yaml](../configs/long_video/dmd_ar5s_bi1p3b.yaml) | History-guided DMD with a 5s AR teacher and a 1.3B bidirectional teacher |
+| [dmd_baseline_bi1p3b.yaml](../configs/long_video/dmd_baseline_bi1p3b.yaml) | DMD baseline with a 1.3B bidirectional teacher |
 | [ar_teacher_10s.yaml](../configs/long_video/ar_teacher_10s.yaml) | AR teacher fine-tuning |
 | [inference.yaml](../configs/long_video/inference.yaml) | Recommended MemRoPE settings for better visual quality in demos. |
+
+The generator, critic and AR teacher use Wan2.1-T2V-1.3B. The 10s AR teacher is fine-tuned; the 5s AR teacher uses the published Causal Forcing checkpoint.
 
 Select training settings with `--config_path`. [default_config.yaml](../configs/long_video/default_config.yaml) supplies shared defaults; `history_guidance_scale` and `teacher_kv` control history guidance.
 
@@ -47,10 +50,10 @@ git clone https://github.com/Vchitect/VBench.git dmd/evaluation/vbench/VBench
 
 ```bash
 bash scripts/long_video/eval_vbench.sh \
-  --config configs/long_video/dmd_10s_teacher.yaml \
+  --config configs/long_video/dmd_ar10s_bi1p3b.yaml \
   --checkpoint models/History-Forcing/dmd/model.pt
 bash scripts/long_video/eval_moviegenbench.sh \
-  --config configs/long_video/dmd_10s_teacher.yaml \
+  --config configs/long_video/dmd_ar10s_bi1p3b.yaml \
   --checkpoint models/History-Forcing/dmd/model.pt
 ```
 

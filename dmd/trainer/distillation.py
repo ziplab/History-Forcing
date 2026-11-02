@@ -504,7 +504,8 @@ class Trainer:
             # Publish after visualization, which also consumes CUDA RNG. A resumed
             # step must continue from the same state as this completed iteration.
             should_save = (self.step % self.config.log_iters == 0
-                           or self.training_evaluation.due(self.step))
+                           or self.training_evaluation.due(self.step)
+                           or (max_steps is not None and self.step >= int(max_steps)))
             if (not self.config.no_save) and (self.step - start_step) > 0 and should_save:
                 torch.cuda.empty_cache()
                 self.save()

@@ -27,6 +27,7 @@ ema_start_step: 200
 total_batch_size: 64
 gradient_accumulate: 8
 
+max_steps: 300
 log_iters: 100
 vis_iters: 50
 vis_prompt_path: dmd/prompts/example_prompts.txt
@@ -43,7 +44,7 @@ dfake_gen_update_ratio: 5
 image_or_video_shape: [1, 21, 16, 60, 104]
 distribution_loss: dmd
 trainer: score_distillation
-logdir: output/dmd/dmd_10s
+logdir: output/dmd/dmd_baseline_bi1p3b
 gradient_checkpointing: true
 num_frame_per_block: 3
 load_raw_video: false
@@ -54,23 +55,4 @@ model_kwargs:
 data_path: dmd/prompts/vidprom_filtered_extended.txt
 num_training_frames: 63
 
-use_history_guidance: true
-ar_teacher_name: Wan2.1-T2V-1.3B
-ar_teacher_ckpt: models/History-Forcing/ar_teacher/model.pt
-ar_teacher_fsdp_wrap_strategy: size
-ar_teacher_kwargs:
-  timestep_shift: 5.0
-  local_attn_size: 42
-  sink_size: 3
-history_guidance_scale: 1.0
-teacher_kv:
-  shared_recent_frames: 6
-  positive:
-    sink_frames: 0
-    history_frames: 12
-  negative:
-    sink_frames: 0
-    history_frames: 0
-history_guidance_max_timestep: 750
-history_guidance_min_prefix_frames: 18
-history_joint_normalization: true
+use_history_guidance: false

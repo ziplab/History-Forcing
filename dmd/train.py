@@ -29,7 +29,7 @@ def main():
     config.no_visualize = args.no_visualize or config.get("no_visualize", False)
     config.tf = args.tf 
     # get the filename of config_path
-    config_name = config.get("config_name") or os.path.basename(args.config_path).split(".")[0]
+    config_name = config.get("config_name") or os.path.splitext(os.path.basename(args.config_path))[0]
     config.config_name = config_name
     config.logdir = str(resource_path(args.logdir)) if args.logdir else config.get("logdir", "")
     config.wandb_save_dir = str(resource_path(args.wandb_save_dir)) if args.wandb_save_dir else config.get("wandb_save_dir", "")

@@ -28,7 +28,7 @@ fi
   exit 2
 }
 
-"$PYTHON" - "$CONFIG_ROOT/dmd_10s_teacher.yaml" "$NNODES" "$NPROC_PER_NODE" "$@" <<'PY'
+"$PYTHON" - "$CONFIG_ROOT/dmd_ar10s_bi1p3b.yaml" "$NNODES" "$NPROC_PER_NODE" "$@" <<'PY'
 import argparse
 import sys
 from utils.paths import load_config
@@ -49,4 +49,4 @@ exec "$PYTHON" -m torch.distributed.run \
   --master_addr="$MASTER_ADDR" \
   --master_port="${MASTER_PORT:-19001}" \
   "$PROJECT_ROOT/train.py" \
-  --config_path "$CONFIG_ROOT/dmd_10s_teacher.yaml" "$@"
+  --config_path "$CONFIG_ROOT/dmd_ar10s_bi1p3b.yaml" "$@"

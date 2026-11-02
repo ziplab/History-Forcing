@@ -73,7 +73,7 @@ Run all commands from the repository root. MemoBench also requires the [evaluati
 | World model | DreamX-World-5B | [🤗 OPSD](https://huggingface.co/xzxxntxdy/History-Forcing/tree/main/opsd) |
 | Autoregressive teacher | Wan2.1-T2V-1.3B | [🤗 AR teacher](https://huggingface.co/xzxxntxdy/History-Forcing/tree/main/ar_teacher) |
 
-The released DMD checkpoint was trained with the 10-second AR teacher.
+The released DMD checkpoint was trained with a 1.3B bidirectional teacher and the 10-second AR teacher.
 
 The [🤗 History-Forcing-Data](https://huggingface.co/datasets/xzxxntxdy/History-Forcing-Data) dataset contains prepared training inputs, PlayWorld OOS tasks and MemoBench Real scenes. The commands below save weights to `models/`, data to `dataset/` and generated videos to `output/`.
 
@@ -144,6 +144,15 @@ hf download zhuhz22/Causal-Forcing chunkwise/ar_diffusion.pt chunkwise/causal_od
 hf download gdhe17/Self-Forcing vidprom_filtered_extended.txt --local-dir dmd/prompts
 
 bash scripts/long_video/train.sh
+```
+
+To train with the 14B bidirectional teacher:
+
+```bash
+hf download Wan-AI/Wan2.1-T2V-14B --local-dir models/Wan2.1-T2V-14B
+
+bash scripts/long_video/train.sh \
+  --config_path configs/long_video/dmd_ar10s_bi14b.yaml
 ```
 
 See [DMD training](dmd/README.md#training) for configurations, AR teacher fine-tuning and distributed training.
