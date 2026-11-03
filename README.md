@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/arXiv-Coming_Soon-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white" alt="Paper coming soon">
+  <a href="https://arxiv.org/abs/2611.02782"><img src="https://img.shields.io/badge/arXiv-2611.02782-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white" alt="Paper (arXiv)"></a>
   <a href="https://ziplab.co/History-Forcing-Project-Page/"><img src="https://img.shields.io/badge/Project-Page-2563EB?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Project page"></a>
   <a href="https://huggingface.co/xzxxntxdy/History-Forcing"><img src="https://img.shields.io/badge/Hugging_Face-Models-FFD21E?style=for-the-badge&logo=huggingface&logoColor=FFD21E" alt="Hugging Face models"></a>
   <a href="https://huggingface.co/datasets/xzxxntxdy/History-Forcing-Data"><img src="https://img.shields.io/badge/Hugging_Face-Data-FFD21E?style=for-the-badge&logo=huggingface&logoColor=FFD21E" alt="Hugging Face data"></a>
@@ -25,7 +25,8 @@
   <a href="#models-and-data">Models &amp; Data</a> &nbsp;·&nbsp;
   <a href="#quick-start">Quick Start</a> &nbsp;·&nbsp;
   <a href="#training">Training</a> &nbsp;·&nbsp;
-  <a href="#evaluation">Evaluation</a>
+  <a href="#evaluation">Evaluation</a> &nbsp;·&nbsp;
+  <a href="#citation">Citation</a>
 </p>
 
 <p align="center">
@@ -40,10 +41,16 @@ History Forcing introduces:
 2. **Long-video consistency.** Earlier chunks of the student rollout provide subject and scene information less affected by accumulated drift. The residual corrects the DMD reference score while retaining the bidirectional teacher's visual-quality supervision.
 3. **Out-of-sight evolution.** Fixed-camera teacher rollouts model how a scene evolves while the student looks away. Their history guides the EMA teacher's velocity target for on-policy self-distillation at revisits.
 
+<p align="center">
+  <a href="https://ziplab.co/History-Forcing-Project-Page/assets/videos/History-Forcing-1080p.mp4"><img src="assets/video-preview.webp" width="100%" alt="Watch the History Forcing overview video"></a>
+  <br><sub>▶ Watch the overview video</sub>
+</p>
+
 ## News
 
+- **2026-11-03:** 📄 Our [paper](https://arxiv.org/abs/2611.02782) is now available on arXiv.
+- **2026-11-02:** 🤗 [Model checkpoints](https://huggingface.co/xzxxntxdy/History-Forcing) and [datasets](https://huggingface.co/datasets/xzxxntxdy/History-Forcing-Data) are publicly available.
 - **2026-10-30:** 🚀 We provide inference, training and evaluation code for long-video generation and out-of-sight world modeling.
-- **Coming soon:** Paper and public release of model checkpoints and datasets.
 
 ## Method Overview
 
@@ -105,12 +112,9 @@ See [long-video inference](dmd/long_video/README.md) for prompt lists, seeds and
 Download the backbone, generator and prepared inputs:
 
 ```bash
-hf download GD-ML/DreamX-World-5B config.json model.safetensors \
-  --local-dir models/DreamX-World-5B
 hf download Wan-AI/Wan2.2-TI2V-5B \
-  Wan2.2_VAE.pth models_t5_umt5-xxl-enc-bf16.pth \
-  google/umt5-xxl/special_tokens_map.json google/umt5-xxl/spiece.model \
-  google/umt5-xxl/tokenizer.json google/umt5-xxl/tokenizer_config.json \
+  --local-dir models/DreamX-World-5B
+hf download GD-ML/DreamX-World-5B config.json model.safetensors \
   --local-dir models/DreamX-World-5B
 hf download xzxxntxdy/History-Forcing opsd/model.pt \
   --local-dir models/History-Forcing
@@ -146,15 +150,6 @@ hf download gdhe17/Self-Forcing vidprom_filtered_extended.txt --local-dir dmd/pr
 bash scripts/long_video/train.sh
 ```
 
-To train with the 14B bidirectional teacher:
-
-```bash
-hf download Wan-AI/Wan2.1-T2V-14B --local-dir models/Wan2.1-T2V-14B
-
-bash scripts/long_video/train.sh \
-  --config_path configs/long_video/dmd_ar10s_bi14b.yaml
-```
-
 See [DMD training](dmd/README.md#training) for configurations, AR teacher fine-tuning and distributed training.
 
 ### World-model training
@@ -187,6 +182,26 @@ scripts/
 dmd/               Long-video implementation and benchmarks
 opsd/              World-model implementation and benchmarks
 assets/            Paper figures
+```
+
+## Citation
+
+If you find this work useful, please cite our paper.
+
+```bibtex
+@misc{kuang2026historyforcing,
+  title={History Forcing: Distilling History-Dependent
+         Continuations for Long-Horizon Video World Models},
+  author={Hangyi Kuang and Chengzhi Wang and Yefei He
+          and Weijie Wang and Yuke Zhao and Zhuokun Chen
+          and Zisu Huang and Yifan Yang and Xiaoxuan He
+          and Feng Chen and Bohan Zhuang},
+  year={2026},
+  eprint={2611.02782},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2611.02782}
+}
 ```
 
 ## Acknowledgements
