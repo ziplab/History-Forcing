@@ -189,18 +189,11 @@ assets/            Paper figures
 If you find this work useful, please cite our paper.
 
 ```bibtex
-@misc{kuang2026historyforcing,
-  title={History Forcing: Distilling History-Dependent
-         Continuations for Long-Horizon Video World Models},
-  author={Hangyi Kuang and Chengzhi Wang and Yefei He
-          and Weijie Wang and Yuke Zhao and Zhuokun Chen
-          and Zisu Huang and Yifan Yang and Xiaoxuan He
-          and Feng Chen and Bohan Zhuang},
-  year={2026},
-  eprint={2611.02782},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV},
-  url={https://arxiv.org/abs/2611.02782}
+@article{kuang2026historyforcing,
+  title={History Forcing: Distilling History-Dependent Continuations for Long-Horizon Video World Models},
+  author={Kuang, Hangyi and Wang, Chengzhi and He, Yefei and Wang, Weijie and Zhao, Yuke and Chen, Zhuokun and Huang, Zisu and Yang, Yifan and He, Xiaoxuan and Chen, Feng and Zhuang, Bohan},
+  journal={arXiv preprint arXiv:2611.02782},
+  year={2026}
 }
 ```
 
