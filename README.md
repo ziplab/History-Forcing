@@ -42,7 +42,7 @@ History Forcing introduces:
 3. **Out-of-sight evolution.** Fixed-camera teacher rollouts model how a scene evolves while the student looks away. Their history guides the EMA teacher's velocity target for on-policy self-distillation at revisits.
 
 <p align="center">
-  <a href="https://ziplab.co/History-Forcing-Project-Page/assets/videos/History-Forcing-1080p.mp4"><img src="assets/video-preview.webp" width="100%" alt="Watch the History Forcing overview video"></a>
+  <a href="https://ziplab.co/History-Forcing-Project-Page/assets/videos/History-Forcing-1080p.mp4"><img src="assets/video-preview.webp" width="640" alt="Watch the History Forcing overview video"></a>
   <br><sub>▶ Watch the overview video</sub>
 </p>
 
