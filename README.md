@@ -132,6 +132,35 @@ bash scripts/world_model/run.sh inference \
 
 See [custom world-model inputs](opsd/README.md#custom-inputs) for input formats.
 
+## Inference with Reactor Runtime
+
+The [Reactor integration](reactor/README.md) serves the DMD long-video model with
+continuous streaming, live prompt updates and an SGF+-style browser client.
+With Docker, the NVIDIA Container Toolkit, one available B200 and the
+[Reactor CLI](https://docs.reactor.inc/deploy/platform/installation) installed:
+
+```bash
+cd reactor
+reactor build
+reactor run --gpus device=0 --port 8080 --shm-size 4g
+```
+
+Wait for `curl -s http://localhost:8080/health` to report `"state":"available"`.
+In a second terminal, from the repository root (Node.js 22.12+):
+
+```bash
+cd reactor/demo
+npm ci
+npm run dev -- --host 127.0.0.1 --port 5173
+```
+
+Open `http://localhost:5173`, set **Runtime URL** in the center of the top bar
+to `http://localhost:8080`,
+click **Apply**, then **Connect**. Enter a prompt and press **Start video**;
+**Update prompt** guides the continuing video. See the
+[adapter guide](reactor/README.md) for validation, licensing notes and
+[SSH/WebRTC setup](reactor/README.md#remote-gpu-access).
+
 ## Training
 
 For Weights & Biases logging, run `wandb login` once before training.
