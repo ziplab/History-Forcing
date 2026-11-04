@@ -24,10 +24,10 @@ beta2_critic: 0.999
 batch_size: 1
 ema_weight: 0.99
 ema_start_step: 200
-total_batch_size: 64
-gradient_accumulate: 8
+total_batch_size: 8
+gradient_accumulate: 1
 
-max_steps: 300
+max_steps: null
 log_iters: 100
 vis_iters: 50
 vis_prompt_path: dmd/prompts/example_prompts.txt

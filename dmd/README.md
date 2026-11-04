@@ -27,15 +27,8 @@ Select training settings with `--config_path`. [default_config.yaml](../configs/
 
 ## Training
 
-### 14B Bidirectional Teacher
-
-To train with the 14B bidirectional teacher:
-
 ```bash
-hf download Wan-AI/Wan2.1-T2V-14B --local-dir models/Wan2.1-T2V-14B
-
-bash scripts/long_video/train.sh \
-  --config_path configs/long_video/dmd_ar10s_bi14b.yaml
+bash scripts/long_video/train.sh
 ```
 
 ### AR Teacher Fine-Tuning
